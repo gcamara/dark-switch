@@ -1,0 +1,129 @@
+/* Tokens from the "mission control" reference (dark). */
+:root {
+  --bg: #0b0a10;
+  --surface-1: #121117;
+  --surface-2: #18171f;
+  --surface-3: #1e1d27;
+  --border: #23222c;
+  --border-strong: #33313f;
+  --text: #ecebf2;
+  --text-muted: #a3a1b2;
+  --accent: #9d8cff;
+  --accent-ink: #0b0a10;
+  --accent-soft: rgba(157, 140, 255, 0.13);
+  --warning: #ffb224;
+  --warning-soft: rgba(255, 178, 36, 0.13);
+  --failure: #ff4d9d;
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --font: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  width: 340px;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 14px/1.5 var(--font);
+}
+
+[hidden] { display: none !important; }
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.head-text { min-width: 0; }
+.head .eyebrow { margin: 0; color: var(--accent); }
+.host { margin: 0; font-size: 16px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; }
+.hint { margin: 8px 0 0; font-size: 12px; color: var(--text-muted); }
+
+/* Switch */
+.switch { position: relative; flex: none; cursor: pointer; }
+.switch input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.track {
+  display: block; width: 44px; height: 24px; border-radius: 999px;
+  background: var(--surface-3); border: 1px solid var(--border-strong);
+  transition: background 150ms var(--ease), border-color 150ms var(--ease);
+}
+.thumb {
+  display: block; width: 18px; height: 18px; margin: 2px; border-radius: 50%;
+  background: var(--text-muted); transition: transform 150ms var(--ease), background 150ms var(--ease);
+}
+.switch input:checked + .track { background: var(--accent); border-color: var(--accent); }
+.switch input:checked + .track .thumb { transform: translateX(20px); background: var(--accent-ink); }
+.switch input:focus-visible + .track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Notices */
+.notice, .banner { margin: 16px 0 0; padding: 12px; border-radius: var(--radius-m); font-size: 12px; }
+.notice { background: var(--surface-2); color: var(--text-muted); }
+.banner { background: var(--warning-soft); border: 1px solid var(--warning); }
+.banner p { margin: 0 0 8px; }
+.error { margin: 8px 0 0; font-size: 12px; color: var(--failure); }
+
+/* Buttons and fields */
+.row { display: flex; gap: 8px; margin-top: 8px; }
+.btn {
+  padding: 6px 12px; border-radius: var(--radius-s); border: 1px solid var(--border-strong);
+  background: var(--surface-2); color: var(--text); font: 500 12px/1.5 var(--font); cursor: pointer;
+  transition: background 150ms var(--ease), border-color 150ms var(--ease);
+}
+.btn:hover { background: var(--surface-3); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.wide { width: 100%; padding: 8px 12px; }
+.link-btn { background: none; border: 0; padding: 0; color: var(--accent); font: 500 12px var(--font); cursor: pointer; }
+.field {
+  flex: 1; min-width: 0; padding: 6px 8px; border-radius: var(--radius-s);
+  border: 1px solid var(--border-strong); background: var(--surface-1); color: var(--text);
+  font: 400 12px/1.5 var(--mono);
+}
+.btn:focus-visible, .field:focus-visible, .link-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Mode */
+.segmented { display: grid; grid-template-columns: 1fr 1fr; padding: 2px; border-radius: var(--radius-m); background: var(--surface-2); border: 1px solid var(--border); }
+.segmented label { position: relative; cursor: pointer; }
+.segmented input { position: absolute; opacity: 0; }
+.segmented span { display: block; padding: 6px; text-align: center; border-radius: var(--radius-s); font-size: 12px; font-weight: 500; color: var(--text-muted); transition: background 150ms var(--ease), color 150ms var(--ease); }
+.segmented input:checked + span { background: var(--accent-soft); color: var(--accent); }
+.segmented input:focus-visible + span { outline: 2px solid var(--accent); }
+
+/* Colors */
+.color-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.swatch { display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--text-muted); cursor: pointer; }
+.swatch input { width: 100%; height: 32px; padding: 0; border: 1px solid var(--border-strong); border-radius: var(--radius-s); background: none; cursor: pointer; }
+.swatch input::-webkit-color-swatch-wrapper { padding: 2px; }
+.swatch input::-webkit-color-swatch { border: 0; border-radius: 4px; }
+.check { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 12px; cursor: pointer; }
+.check input { accent-color: var(--accent); }
+
+/* Lists */
+.list { list-style: none; margin: 8px 0 0; padding: 0; max-height: 160px; overflow-y: auto; }
+.list li { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: var(--radius-s); }
+.list li:hover { background: var(--surface-2); }
+.list .label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 12px/1.5 var(--mono); }
+.list .meta { font-size: 11px; color: var(--text-muted); }
+.list .remove { flex: none; width: 24px; height: 24px; border: 0; border-radius: var(--radius-s); background: none; color: var(--text-muted); cursor: pointer; font-size: 16px; line-height: 1; }
+.list .remove:hover { background: var(--surface-3); color: var(--failure); }
+.list .empty { color: var(--text-muted); font-size: 12px; }
+.list .current .label { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

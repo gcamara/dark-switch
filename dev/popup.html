@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DarkSwitch popup harness</title>
+    <script src="chrome-stub.js"></script>
+    <script>
+      // Loads the real popup markup after the stub so window.chrome survives (document.open keeps the Window).
+      fetch("../src/popup/popup.html")
+        .then((r) => r.text())
+        .then((html) => {
+          const withBase = html.replace("<head>", '<head><base href="../src/popup/">');
+          document.open();
+          document.write(withBase);
+          document.close();
+        });
+    </script>
+  </head>
+  <body></body>
+</html>

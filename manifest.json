@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "DarkSwitch",
+  "version": "1.0.0",
+  "description": "Dark theme on the sites you choose, with your own colors and per-site hidden elements.",
+  "permissions": ["storage", "activeTab"],
+  "icons": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png", "128": "icons/icon-128.png" },
+  "background": { "service_worker": "src/background.js" },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "DarkSwitch",
+    "default_icon": { "16": "icons/icon-16.png", "32": "icons/icon-32.png" }
+  },
+  "commands": {
+    "toggle-site": {
+      "suggested_key": { "default": "Alt+Shift+D" },
+      "description": "Toggle the dark theme on the current site"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "src/lib/host.js",
+        "src/lib/palette.js",
+        "src/lib/settings.js",
+        "src/lib/dark-detect.js",
+        "src/lib/selector.js",
+        "src/content/picker.js",
+        "src/content/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ]
+}

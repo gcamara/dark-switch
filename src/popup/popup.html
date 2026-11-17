@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>DarkSwitch</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="head">
+      <div class="head-text">
+        <p class="eyebrow">DarkSwitch</p>
+        <h1 id="host" class="host">This page</h1>
+      </div>
+      <label class="switch" title="Dark theme on this site (Alt+Shift+D)">
+        <input type="checkbox" id="enabled" role="switch" aria-label="Dark theme on this site" />
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </header>
+
+    <p id="unavailable" class="notice" hidden></p>
+
+    <div id="dark-confirm" class="banner" role="alertdialog" aria-labelledby="dark-confirm-text" hidden>
+      <p id="dark-confirm-text">This site already looks dark. Use your theme anyway?</p>
+      <div class="row">
+        <button id="override" class="btn primary" type="button">Use mine</button>
+        <button id="keep-site" class="btn" type="button">Keep the site's</button>
+      </div>
+    </div>
+
+    <main id="controls">
+      <section>
+        <h2 class="eyebrow">Mode</h2>
+        <div class="segmented" role="radiogroup" aria-label="Theme mode">
+          <label><input type="radio" name="mode" value="palette" /><span>Palette</span></label>
+          <label><input type="radio" name="mode" value="invert" /><span>Invert</span></label>
+        </div>
+        <p class="hint">Use Invert on sites where Palette looks broken.</p>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2 class="eyebrow">Colors</h2>
+          <button id="reset-colors" class="link-btn" type="button">Reset</button>
+        </div>
+        <div id="color-grid" class="color-grid"></div>
+        <label class="check"><input type="checkbox" id="site-only" /> Custom colors for this site only</label>
+      </section>
+
+      <section>
+        <h2 class="eyebrow">Hidden elements</h2>
+        <button id="pick" class="btn primary wide" type="button">Pick an element to hide</button>
+        <form id="add-hidden" class="row">
+          <input id="hidden-input" class="field" placeholder="or type a CSS selector, e.g. .cookie-bar" spellcheck="false" />
+          <button class="btn" type="submit">Add</button>
+        </form>
+        <p id="hidden-error" class="error" hidden></p>
+        <ul id="hidden-list" class="list"></ul>
+      </section>
+    </main>
+
+    <section class="sites">
+      <h2 class="eyebrow">Your sites</h2>
+      <ul id="site-list" class="list"></ul>
+    </section>
+
+    <script src="../lib/host.js"></script>
+    <script src="../lib/palette.js"></script>
+    <script src="../lib/settings.js"></script>
+    <script src="popup-core.js"></script>
+    <script src="popup-colors.js"></script>
+    <script src="popup-lists.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

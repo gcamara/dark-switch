@@ -1,0 +1,10 @@
+{
+  "name": "dark-switch",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension: per-site dark theme, custom colors, hidden elements.",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "dev": "python -m http.server 5733"
+  }
+}
